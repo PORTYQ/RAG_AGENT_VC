@@ -2,3 +2,4 @@ python-dotenv==1.2.1
 SQLAlchemy==2.0.44
 yandex-cloud-ml-sdk==0.16.0
 pandas==2.3.3
+spire.doc==13.8.0
