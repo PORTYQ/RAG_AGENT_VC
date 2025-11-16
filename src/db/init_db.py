@@ -2,6 +2,7 @@ from  sqlalchemy import Integer,String
 from pathlib import Path
 import pandas as pd
 from connection import engine
+
 def load_csv_to_sqlite(csv_path:str,table_name:str):
     df = pd.read_csv(csv_path)
     if 'id' not in df.columns:
