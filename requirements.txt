@@ -3,3 +3,6 @@ SQLAlchemy==2.0.44
 yandex-cloud-ml-sdk==0.16.0
 pandas==2.3.3
 spire.doc==13.8.0
+langgraph==1.0.1
+langchain==0.3.27
+gigachat==0.1.43

@@ -22,8 +22,8 @@ def run_sql_query(request_user:str,egine:str)->str:
     system_promt = load_promt('sql_generator.txt')
     #Запрос пользователя
     sql_query = generate_sql_promt(engine,system_promt,request_user)
-    #result = fetch_to_df(sql_query,engine)
-    return sql_query #result
+    result = fetch_to_df(sql_query,engine)
+    return result
 
 if __name__ == '__main__':
     pass

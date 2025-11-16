@@ -3,31 +3,18 @@ import os
 from dotenv import load_dotenv
 from sqlalchemy import inspect
 import re
+from src.db.schema_introspection import get_full_schema,get_descriptions
 #from src.db.connection import engine
 
 def generate_sql_promt(engine,system_promt,request_user):
     load_dotenv()
-    inspector = inspect(engine)
-    tables = inspector.get_table_names()
-    columns = [
-        'id (integer)'
-        "Год (integer)",
-        "Спутник (string)",
-        "Площадь с растительностью, кв. м (String)",
-        "Площадь без растительности, кв. м (String)",
-        "%A (String)",
-        "1 - %A (String)",
-        "%B (String)",
-        "1 - %B (String)"
-    ]
-    text = (
-        f"В базе данных есть таблицы: {', '.join(tables)}.\n\n"
-        f"Эти таблицы содержит следующие колонки: {', '.join(columns)}."
-    )
+    schema = get_full_schema(engine)
+    descriptions = get_descriptions(schema)
+    schema_txt = '\n'.join(descriptions)
     sdk = YCloudML(folder_id = os.getenv('FOLDER_ID'), auth= os.getenv('TOKEN'))
     model = sdk.models.completions("yandexgpt")
     prompt = system_promt.format(
-        text = text,
+        schema_txt = schema_txt,
         request_user = request_user
     )
     #SQL запрос LLM

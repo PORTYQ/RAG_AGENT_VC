@@ -9,7 +9,7 @@ import uuid
 from langchain_core.language_models import LanguageModelLike
 #from langchain_community.chat_models.yandex import ChatYandexGPT
 import os
-from dotenv import find_dotenv, load_dotenv
+from dotenv import  load_dotenv
 #from pydantic import SecretStr
 from .tools.sql_tools import run_sql_query
 from src.prompts.loader import load_promt
@@ -17,7 +17,7 @@ from src.prompts.loader import load_promt
 from langchain_gigachat.chat_models import GigaChat
 ModelT = str | LanguageModelLike
 
-load_dotenv(find_dotenv())
+load_dotenv()
 
 class LLM:
     def __init__(self,model:ModelT,tools:Sequence[BaseTool]) -> None:
@@ -63,8 +63,8 @@ def start_llm():
      
      model = GigaChat(
           model="GigaChat-Pro",
-          credentials ='MDE5YTAxOWYtNzcxZS03OWIxLTlmOGEtNzhkNTMwYmZhMjVlOjQ2MDZhM2Q1LWY2ZTItNDJkOS1hNTZjLTY2MzQwZjc4MzhjMw==',
-          scope = 'GIGACHAT_API_PERS',
+          credentials =os.getenv('CREDENTIALS'),
+          scope = os.getenv('SCOPE'),
           verify_ssl_certs=False,
      )
      agent = LLM(model,tools=[run_sql_query])

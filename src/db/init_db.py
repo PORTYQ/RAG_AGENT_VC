@@ -1,4 +1,4 @@
-from  sqlalchemy import Integer,String
+from  sqlalchemy import Integer,String,Float
 from pathlib import Path
 import pandas as pd
 from connection import engine
@@ -16,13 +16,7 @@ def load_csv_to_sqlite(csv_path:str,table_name:str):
         dtype ={
         'id':Integer(),
         'Год':Integer(),
-        "Спутник":String(),
-        "Площадь с растительностью, кв. м":String(),
-        "Площадь без растительности, кв. м":String(),
-        "%A":String(),
-        "1 - %A":String(),
-        "%B":String(),
-        "1 - %B":String(),
+        'Среднее значение NDVI':Float(),
         }
      )    
 def main():
